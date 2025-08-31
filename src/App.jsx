@@ -2,8 +2,6 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import HomePage from './components/HomePage'
 import SchedulePage from './components/SchedulePage'
 import TrendingPage from './components/TrendingPage'
-import ExhibitionsPage from './components/ExhibitionsPage'
-import WorkshopsPage from './components/WorkshopsPage'
 import AboutPage from './components/AboutPage'
 import MapPage from './components/MapPage'
 import IntroVideo from './components/IntroVideo'
@@ -15,7 +13,7 @@ function App() {
   const [currentTime, setCurrentTime] = useState(new Date())
   const [showIntroVideo, setShowIntroVideo] = useState(true)
   const inactivityTimerRef = useRef(null)
-  const pages = [HomePage, SchedulePage, TrendingPage, ExhibitionsPage, WorkshopsPage, AboutPage, MapPage]
+  const pages = [HomePage, SchedulePage, TrendingPage, AboutPage, MapPage]
 
   // Handle user activity to reset inactivity timer
   const handleUserActivity = useCallback(() => {
@@ -110,8 +108,8 @@ function App() {
         
         <div className="nav-pages">
           {pages.map((page, index) => {
-            const pageNames = ['Home', 'Schedule', 'Trending', 'Exhibitions', 'Workshops', 'About', 'Map'];
-            const pageIcons = ['🏠', '📅', '🔥', '🏛️', '🔧', 'ℹ️', '🗺️'];
+            const pageNames = ['Home', 'Schedule', 'Trending', 'About', 'Map'];
+            // const pageIcons = ['🏠', '📅', '🔥', 'ℹ️', '🗺️'];
             return (
               <div
                 key={index}
@@ -119,7 +117,7 @@ function App() {
                 onClick={() => handlePageClick(index)}
                 style={{ cursor: 'pointer' }}
               >
-                <span className="nav-item-icon">{pageIcons[index]}</span>
+                {/* <span className="nav-item-icon">{pageIcons[index]}</span> */}
                 <span className="nav-item-name">{pageNames[index]}</span>
               </div>
             );
