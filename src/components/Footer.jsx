@@ -6,10 +6,10 @@ function Footer() {
       <div className="footer-content">
         <div className="footer-main">
           <h3 className="footer-title">University of Peradeniya</h3>
-          <p className="footer-description">
+          {/* <p className="footer-description">
             Leading the way in engineering education and innovation in Sri Lanka since 1961. Join us in 
             exploring the frontiers of technology and engineering excellence.
-          </p>
+          </p> */}
         </div>
         <div className="footer-bottom">
           <span>© 2024 Faculty of Engineering</span>
