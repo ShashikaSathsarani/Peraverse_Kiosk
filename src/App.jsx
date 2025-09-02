@@ -110,7 +110,7 @@ function App() {
         <div className="nav-pages">
           {pages.map((page, index) => {
             const pageNames = ['Home', 'Schedule', 'Trending', 'About', 'Map', 'Contact'];
-            const pageIcons = ['🏠', '📅', '🔥', 'ℹ️', '🗺️', '📞'];
+            // const pageIcons = ['🏠', '📅', '🔥', 'ℹ️', '🗺️', '📞'];
             return (
               <div
                 key={index}
@@ -118,7 +118,7 @@ function App() {
                 onClick={() => handlePageClick(index)}
                 style={{ cursor: 'pointer' }}
               >
-                <span className="nav-item-icon">{pageIcons[index]}</span>
+                {/* <span className="nav-item-icon">{pageIcons[index]}</span> */}
                 <span className="nav-item-name">{pageNames[index]}</span>
               </div>
             );
@@ -155,5 +155,7 @@ function App() {
     </div>
   )
 }
+
+
 
 export default App

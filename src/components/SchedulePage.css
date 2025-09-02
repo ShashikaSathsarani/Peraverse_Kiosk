@@ -1,4 +1,11 @@
-/* SchedulePage.css - Updated for row-by-row layout */
+/* ========================================
+   SCHEDULE PAGE STYLES
+   Clean and organized CSS for event schedule
+   ======================================== */
+
+/* ========================================
+   MAIN PAGE CONTAINER
+   ======================================== */
 .schedule-page {
   width: 100%;
   height: 100%;
@@ -16,7 +23,9 @@
   width: 100%;
 }
 
-/* Header */
+/* ========================================
+   HEADER SECTION
+   ======================================== */
 .schedule-header {
   margin-bottom: 2rem;
   text-align: center;
@@ -31,11 +40,13 @@
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Search Container */
+/* ========================================
+   SEARCH FUNCTIONALITY
+   ======================================== */
 .search-container {
   max-width: 600px;
   margin: 0 auto;
-  position: relative;
+  position: left;
 }
 
 .search-input {
@@ -61,18 +72,30 @@
   opacity: 0.8;
 }
 
-/* Events List - Row by Row Layout with increased gap */
+/* ========================================
+   EVENTS LIST LAYOUT
+   ======================================== */
 .events-list {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem; /* Increased from 1rem to 1.5rem */
+  gap: 1.5rem;
   margin-top: 2rem;
 }
 
-/* Event Row */
+/* No events found message */
+.no-events {
+  text-align: center;
+  padding: 3rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.2rem;
+}
+
+/* ========================================
+   EVENT CARD STYLING
+   ======================================== */
 .event-row {
   position: relative;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(248, 244, 244, 0.1);
   backdrop-filter: blur(20px);
   border-radius: 15px;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -88,7 +111,9 @@
   background: rgba(255, 255, 255, 0.15);
 }
 
-/* Status Badge */
+/* ========================================
+   STATUS BADGE
+   ======================================== */
 .event-status-badge {
   position: absolute;
   top: 1rem;
@@ -105,7 +130,9 @@
   letter-spacing: 1px;
 }
 
-/* Event Content */
+/* ========================================
+   EVENT CONTENT LAYOUT
+   ======================================== */
 .event-content {
   margin-top: 2rem;
   display: flex;
@@ -115,6 +142,7 @@
   gap: 1rem;
 }
 
+/* Main event information */
 .event-main-info {
   flex: 1;
   min-width: 300px;
@@ -134,7 +162,9 @@
   margin: 0;
 }
 
-/* Event Details */
+/* ========================================
+   EVENT DETAILS (TIME & LOCATION)
+   ======================================== */
 .event-details {
   display: flex;
   gap: 3rem;
@@ -149,6 +179,7 @@
   text-align: center;
 }
 
+/* Labels for location and time */
 .location-label,
 .time-label {
   color: rgba(255, 255, 255, 0.7);
@@ -232,4 +263,33 @@
   .event-time {
     text-align: left;
   }
+}
+
+/* Loading and Error States */
+.loading-message, .error-message {
+  text-align: center;
+  padding: 3rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.2rem;
+}
+
+.error-message {
+  color: rgba(255, 100, 100, 0.9);
+}
+
+.retry-button {
+  margin-top: 1rem;
+  padding: 0.8rem 1.5rem;
+  background: rgba(59, 130, 246, 0.8);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.retry-button:hover {
+  background: rgba(59, 130, 246, 1);
+  transform: translateY(-2px);
 }
