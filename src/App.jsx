@@ -5,6 +5,7 @@ import TrendingPage from './components/TrendingPage'
 import AboutPage from './components/AboutPage'
 import MapPage from './components/MapPage'
 import ContactPage from './components/ContactPage'
+import NotificationsPage from './components/NotificationsPage'
 import IntroVideo from './components/IntroVideo'
 import logo from './assets/university-of-peradeniya-logo-png_seeklogo-480462-removebg-preview.png'
 import './App.css'
@@ -14,7 +15,7 @@ function App() {
   const [currentTime, setCurrentTime] = useState(new Date())
   const [showIntroVideo, setShowIntroVideo] = useState(true)
   const inactivityTimerRef = useRef(null)
-  const pages = [HomePage, SchedulePage, TrendingPage, AboutPage, MapPage, ContactPage]
+  const pages = [HomePage, SchedulePage, TrendingPage, AboutPage, MapPage, ContactPage, NotificationsPage]
 
   // Handle user activity to reset inactivity timer
   const handleUserActivity = useCallback(() => {
@@ -109,8 +110,8 @@ function App() {
         
         <div className="nav-pages">
           {pages.map((page, index) => {
-            const pageNames = ['Home', 'Schedule', 'Trending', 'About', 'Map', 'Contact'];
-            // const pageIcons = ['🏠', '📅', '🔥', 'ℹ️', '🗺️', '📞'];
+              const pageNames = ['Home', 'Schedule', 'Trending', 'About', 'Map', 'Contact', 'Notifications'];
+            // const pageIcons = ['🏠', '📅', '🔥', 'ℹ️', '🗺️', '📞', '🔔'];
             return (
               <div
                 key={index}
