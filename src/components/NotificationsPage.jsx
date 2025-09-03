@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './NotificationsPage.css';
 
-const API_URL = 'https://example.com/api/notifications'; // Replace with your API endpoint
+const API_URL = 'http://localhost:3000/api/events/:id/status'; // Replace with your API endpoint
 
 function NotificationsPage() {
   const [notifications, setNotifications] = useState([]);
