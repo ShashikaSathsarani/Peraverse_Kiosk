@@ -41,14 +41,14 @@
 }
 
 .subtitle {
-  font-size: 1.4rem;
+  font-size: 2rem;
   color: rgba(255, 255, 255, 0.95);
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
 
 .university {
-  font-size: 1.2rem;
+  font-size: 2rem;
   color: rgba(255, 255, 255, 0.85);
   font-weight: 500;
 }
@@ -74,7 +74,7 @@
 }
 
 .description-title {
-  font-size: 2rem;
+  font-size: 3rem;
   font-weight: 700;
   color: #ff9800;
   margin-bottom: 1rem;

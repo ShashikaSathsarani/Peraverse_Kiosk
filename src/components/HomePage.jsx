@@ -21,7 +21,7 @@ const HomePage = () => {
 
         {/* ✅ Description Section */}
         <div className="description-section glass-card">
-          <h2 className="description-title">Peraverse Exhibition 2025</h2>
+          <h2 className="description-title">EngEx Exhibition 2025</h2>
           <p className="description-text">
             The <strong>Peraverse Exhibition 2025</strong> is a celebration of
             innovation and engineering excellence, proudly hosted by the Faculty
