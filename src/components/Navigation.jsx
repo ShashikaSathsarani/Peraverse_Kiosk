@@ -16,7 +16,7 @@ const Navigation = ({ currentPage, onPageClick, pages }) => {
   const [currentTime, setCurrentTime] = useState(new Date())
   
   // Page names corresponding to the components (removed Trending)
-  const pageNames = ['Home', 'Schedule', 'About', 'Map', 'Contact', 'Notifications']
+  const pageNames = ['Home', 'About', 'Schedule', 'Notifications', 'Map', 'Heat Map', 'Contact']
   // Optional: Page icons (updated to include notification icon)
   // const pageIcons = ['🏠', '📅', '🔥', 'ℹ️', '🗺️', '📞', '🔔']
   
