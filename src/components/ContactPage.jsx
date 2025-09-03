@@ -89,6 +89,17 @@ const ContactPage = () => {
     }
   ];
 
+  // Function to handle navigation to map page
+  const handleViewOnMap = () => {
+    // This would typically use React Router or your navigation method
+    // For now, we'll use a simple alert to demonstrate
+    alert("Navigating to Interactive Map Page with Phone Booth Locations");
+    // In a real implementation, you would use:
+    // navigate('/map-page?show=phone-booths');
+    // or
+    // window.location.href = '/map-page?show=phone-booths';
+  };
+
   const renderEmergencyContacts = () => (
     <div className="emergency-grid">
       {emergencyContacts.map((contact, index) => (
@@ -102,7 +113,6 @@ const ContactPage = () => {
           <div className="emergency-number">
             <span className="phone-icon">📞</span>
             <span className="number">{contact.number}</span>
-            <button className="dial-btn">📞</button>
           </div>
           <p className="emergency-description">{contact.description}</p>
           <div className="availability">
@@ -139,13 +149,23 @@ const ContactPage = () => {
   );
 
   const renderPhoneBooths = () => (
-    <div className="phone-booth-grid">
-      {phoneBooths.map((location, index) => (
-        <div key={index} className="phone-booth-card">
-          <span className="booth-icon">📞</span>
-          <p>{location}</p>
-        </div>
-      ))}
+    <div className="phone-booth-section">
+      <div className="phone-booth-grid">
+        {phoneBooths.map((location, index) => (
+          <div key={index} className="phone-booth-card">
+            <div className="booth-icon-container">
+              <span className="booth-icon">📞</span>
+            </div>
+            <p>{location}</p>
+          </div>
+        ))}
+      </div>
+      <div className="map-button-container">
+        <button className="map-button" onClick={handleViewOnMap}>
+          <span className="map-icon">🗺️</span>
+          View on Interactive Map
+        </button>
+      </div>
     </div>
   );
 
@@ -172,7 +192,10 @@ const ContactPage = () => {
   const renderImportantInfo = () => (
     <div className="important-info">
       <div className="info-card">
-        <h3>Emergency Procedures</h3>
+        <div className="info-card-header">
+          <span className="info-icon">🚨</span>
+          <h3>Emergency Procedures</h3>
+        </div>
         <ul>
           <li>In case of fire, evacuate immediately and call 110</li>
           <li>For medical emergencies, call 119 or nearest medical center</li>
@@ -181,7 +204,10 @@ const ContactPage = () => {
         </ul>
       </div>
       <div className="info-card">
-        <h3>Event Guidelines</h3>
+        <div className="info-card-header">
+          <span className="info-icon">📋</span>
+          <h3>Event Guidelines</h3>
+        </div>
         <ul>
           <li>Please keep your registration badge visible at all times</li>
           <li>Follow all safety protocols and guidelines</li>
@@ -213,6 +239,9 @@ const ContactPage = () => {
     <div className="contact-page">
       <div className="contact-container">
         <div className="contact-header">
+          <div className="header-icon-container">
+            <span className="header-main-icon">📞</span>
+          </div>
           <h1>Emergency & Contact Information</h1>
           <p className="header-subtitle">Faculty of Engineering • University of Peradeniya</p>
         </div>
@@ -237,31 +266,41 @@ const ContactPage = () => {
             onClick={() => setSelectedSection('phones')}
           >
             <span className="btn-icon">📞</span>
-            Phone Booth Locations
+            Phone Booths
           </button>
           <button 
             className={`section-btn ${selectedSection === 'event' ? 'active' : ''}`}
             onClick={() => setSelectedSection('event')}
           >
             <span className="btn-icon">ℹ️</span>
-            Event Information
+            Event Info
           </button>
           <button 
             className={`section-btn ${selectedSection === 'important' ? 'active' : ''}`}
             onClick={() => setSelectedSection('important')}
           >
             <span className="btn-icon">📋</span>
-            Important Information
+            Important Info
           </button>
         </div>
 
         <div className="section-content">
-          {selectedSection === 'emergency' && (
-            <div className="section-header">
-              <span className="section-icon">🚨</span>
-              <h2>Emergency Contacts</h2>
-            </div>
-          )}
+          <div className="section-header">
+            <span className="section-icon">
+              {selectedSection === 'emergency' && '🚨'}
+              {selectedSection === 'medical' && '🏥'}
+              {selectedSection === 'phones' && '📞'}
+              {selectedSection === 'event' && 'ℹ️'}
+              {selectedSection === 'important' && '📋'}
+            </span>
+            <h2>
+              {selectedSection === 'emergency' && 'Emergency Contacts'}
+              {selectedSection === 'medical' && 'Medical Centers'}
+              {selectedSection === 'phones' && 'Phone Booth Locations'}
+              {selectedSection === 'event' && 'Event Information'}
+              {selectedSection === 'important' && 'Important Information'}
+            </h2>
+          </div>
           {renderContent()}
         </div>
       </div>
