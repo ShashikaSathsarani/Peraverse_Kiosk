@@ -1,115 +1,130 @@
-/* Container */
-.home-container {
+/* Page layout */
+.home-page {
+  background: none; /* no solid background */
+  min-height: 100vh;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem;
+  position: relative;
+  overflow-x: hidden; /* no horizontal scroll */
+  overflow-y: auto;   /* only vertical if needed */
+}
+
+/* Prevent scroll if content fits */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Top section layout: left + right */
+.top-section {
+  display: flex;
+  gap: 2rem;
+  width: 100%;
+  margin-top: 2rem;
+  padding: 1rem;
+}
+
+/* Left column (logo + faculty info) */
+.left-column {
+  flex: 1;
+  min-width: 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
-  padding: 2rem 1rem;
-}
-
-/* ✅ Top Section: Logo + Info */
-.top-section {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 2rem;
-  padding: 2rem;
-  width: 100%;
-}
-
-.logo-side {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-}
-
-.pera-logo {
-  max-width: 280px;
-  height: auto;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-.text-side {
-  flex: 2;
-  text-align: left;
-  min-width: 280px;
-}
-
-.subtitle {
-  font-size: 2rem;
-  color: rgba(255, 255, 255, 0.95);
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.university {
-  font-size: 2rem;
-  color: rgba(255, 255, 255, 0.85);
-  font-weight: 500;
-}
-
-.date-time {
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(255, 152, 0, 0.3);
-}
-
-.event-date {
-  font-size: 1.3rem;
-  color: #ff9800;
-  font-weight: 600;
-}
-
-/* ✅ Description Section */
-.description-section {
   text-align: center;
-  padding: 2.5rem;
-  margin-top: 1rem;
-  width: 100%;
+  gap: 1rem;
+  color: #f5f5f5; /* light text */
 }
 
-.description-title {
-  font-size: 3rem;
-  font-weight: 700;
-  color: #ff9800;
+/* Logo above faculty info */
+.left-logo {
+  height: 80px;
+  width: auto;
   margin-bottom: 1rem;
 }
 
-.description-text {
-  font-size: 1.2rem;
-  color: rgba(255, 255, 255, 0.9);
-  line-height: 1.7;
-  max-width: 900px;
-  margin: 0 auto;
+/* Faculty info styling */
+.faculty-title {
+  font-size: 1.9rem;
+  font-weight: bold;
+  color: #ff9800; /* orange */
+  margin: 0;
 }
 
-/* ✅ Glass Card */
-.glass-card {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
-  padding: 1.5rem;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+.university-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #f5f5f5;
+  margin: 0;
 }
 
-/* ✅ Fade-in Animation */
-.fade-in {
-  animation: fadeIn 1s ease-in;
+.event-date-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #f5f5f5;
+  margin: 0;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.faculty-description {
+  font-size: 1rem;
+  font-weight: 400;
+  margin-top: 0.5rem;
+  line-height: 1.5;
+  color: #e0e0e0;
+}
+
+/* Right column: slideshow + welcome box */
+.right-column {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Slideshow box */
+.slide-box {
+  flex: 1;
+  position: relative;
+}
+
+.slide-image {
+  width: 100%;
+  height: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* Subtitle overlay for slideshow */
+.slide-caption {
+  position: absolute;
+  bottom: 8px;
+  left: 12px;
+  background: rgba(0,0,0,0.5);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: #eeeeed; /* orange */
+  font-weight: 500;
+}
+
+/* Welcome message box */
+.welcome-box {
+  flex: 1;
+}
+
+.welcome-title {
+  font-size: 1.5rem;
+  color: #ff9800; /* orange */
+  margin-bottom: 0.5rem;
+}
+
+.welcome-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #f5f5f5;
 }
