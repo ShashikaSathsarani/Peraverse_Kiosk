@@ -1,130 +1,99 @@
-/* Page layout */
 .home-page {
-  background: none; /* no solid background */
+  background: none;
   min-height: 100vh;
   width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 2rem;
-  position: relative;
-  overflow-x: hidden; /* no horizontal scroll */
-  overflow-y: auto;   /* only vertical if needed */
-}
-
-/* Prevent scroll if content fits */
-html, body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-}
-
-/* Top section layout: left + right */
-.top-section {
-  display: flex;
-  gap: 2rem;
-  width: 100%;
-  margin-top: 2rem;
-  padding: 1rem;
-}
-
-/* Left column (logo + faculty info) */
-.left-column {
-  flex: 1;
-  min-width: 250px;
-  display: flex;
-  flex-direction: column;
+  flex-direction: column; /* stack sections top to bottom */
   align-items: center;
-  text-align: center;
-  gap: 1rem;
-  color: #f5f5f5; /* light text */
-}
-
-/* Logo above faculty info */
-.left-logo {
-  height: 80px;
-  width: auto;
-  margin-bottom: 1rem;
-}
-
-/* Faculty info styling */
-.faculty-title {
-  font-size: 1.9rem;
-  font-weight: bold;
-  color: #ff9800; /* orange */
+  padding: 0;
   margin: 0;
 }
 
-.university-title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #f5f5f5;
-  margin: 0;
-}
-
-.event-date-title {
-  font-size: 1.3rem;
-  font-weight: bold;
-  color: #f5f5f5;
-  margin: 0;
-}
-
-.faculty-description {
-  font-size: 1rem;
-  font-weight: 400;
-  margin-top: 0.5rem;
-  line-height: 1.5;
-  color: #e0e0e0;
-}
-
-/* Right column: slideshow + welcome box */
-.right-column {
-  flex: 3;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-/* Slideshow box */
-.slide-box {
-  flex: 1;
+/* ✅ Fullscreen slideshow */
+.slideshow-container {
   position: relative;
+  width: 100%;
+  height: 100vh; /* full screen height */
+  overflow: hidden;
 }
 
 .slide-image {
   width: 100%;
   height: 100%;
-  max-height: 300px;
-  object-fit: cover;
-  border-radius: 12px;
+  object-fit: cover; /* show full image proportionally */
 }
 
-/* Subtitle overlay for slideshow */
+/* ✅ Logo top-left */
+.overlay-logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  height: 80px;
+  width: auto;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 6px;
+}
+
+/* ✅ Caption bottom-left */
 .slide-caption {
   position: absolute;
-  bottom: 8px;
-  left: 12px;
-  background: rgba(0,0,0,0.5);
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  color: #eeeeed; /* orange */
+  bottom: 20px;
+  left: 20px;
+  background: rgba(0,0,0,0.6);
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1.2rem;
   font-weight: 500;
 }
 
-/* Welcome message box */
-.welcome-box {
-  flex: 1;
+/* ✅ Transparent card styling */
+.glass-card {
+  margin: 2rem 1rem;
+  padding: 2rem;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(6px);
+  max-width: 900px;
+  text-align: center;
+}
+
+/* Text styles */
+.faculty-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ff9800;
+  margin: 0;
+}
+
+.university-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #f5f5f5;
+  margin: 0.3rem 0;
+}
+
+.event-date-title {
+  font-size: 1.3rem;
+  color: #ddd;
+  margin: 0.3rem 0;
+}
+
+.faculty-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #eee;
 }
 
 .welcome-title {
-  font-size: 1.5rem;
-  color: #ff9800; /* orange */
-  margin-bottom: 0.5rem;
+  font-size: 1.6rem;
+  color: #ff9800;
+  margin-bottom: 1rem;
 }
 
 .welcome-text {
-  font-size: 1rem;
+  font-size: 1.1rem;
   line-height: 1.6;
   color: #f5f5f5;
 }

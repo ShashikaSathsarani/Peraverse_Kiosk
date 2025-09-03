@@ -22,58 +22,42 @@ const HomePage = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length)
-    }, 3000) // 3 seconds per slide
+    }, 4000) // 4s per slide
     return () => clearInterval(interval)
   }, [slides.length])
 
   return (
     <div className="home-page fade-in">
-      <div className="home-container">
+      {/* ✅ Fullscreen slideshow */}
+      <div className="slideshow-container">
+        <img
+          src={slides[currentIndex].image}
+          alt={`Slide ${currentIndex + 1}`}
+          className="slide-image"
+        />
 
-        {/* ✅ Top section: left column + right column */}
-        <div className="top-section glass-card">
-
-          {/* Left column (logo + faculty info) */}
-          <div className="left-column">
-            <img src={EngexLogo} alt="EngEx Logo" className="left-logo" />
-            <p className="faculty-title">Faculty of Engineering</p>
-            <p className="university-title">University of Peradeniya</p>
-            <p className="event-date-title">August 26, 2025</p>
-            <p className="faculty-description">
-              Sri Lanka’s oldest and most prestigious engineering institution — shaping
-              generations of innovators, leaders, and visionaries for over 75 years.
-            </p>
-          </div>
-
-          {/* Right column with slideshow + welcome message */}
-          <div className="right-column">
-            {/* Slideshow box */}
-            <div className="slide-box glass-card">
-              <img
-                src={slides[currentIndex].image}
-                alt={`Faculty slideshow ${currentIndex + 1}`}
-                className="slide-image"
-              />
-              <div className="slide-caption">
-                {slides[currentIndex].caption}
-              </div>
-            </div>
-
-            {/* Welcome message */}
-            <div className="welcome-box glass-card">
-              <h3 className="welcome-title"> Celebrating 75 Years of Excellence!</h3>
-              <p className="welcome-text">
-                The <strong>Faculty of Engineering, University of Peradeniya</strong> proudly presents 
-                <strong> EngEx2025</strong> – The Diamond Jubilee Exhibition.
-              </p>
-              <p className="welcome-text">
-                Discover groundbreaking <strong>research, innovations</strong>, and 
-                <strong> future-shaping projects</strong> as we mark this historic milestone 
-                in engineering education and impact.
-              </p>
-            </div>
-          </div>
+        {/* ✅ Overlay: logo top-left, caption bottom-left */}
+        <img src={EngexLogo} alt="EngEx Logo" className="overlay-logo" />
+        <div className="slide-caption">
+          {slides[currentIndex].caption}
         </div>
+      </div>
+
+      {/* ✅ Description below slideshow */}
+      <div className="description-box glass-card">
+        <h2 className="faculty-title">Faculty of Engineering</h2>
+        <h3 className="university-title">University of Peradeniya</h3>
+        <p className="event-date-title">August 26, 2025</p>
+        <p className="faculty-description">
+          Sri Lanka’s oldest and most prestigious engineering institution — shaping
+          generations of innovators, leaders, and visionaries for over 75 years.
+        </p>
+        <p className="faculty-description">
+          The <strong>Faculty of Engineering, University of Peradeniya</strong> proudly presents 
+          <strong> EngEx2025</strong> – The Diamond Jubilee Exhibition. Discover groundbreaking 
+          <strong> research, innovations</strong>, and <strong>future-shaping projects</strong> 
+          as we mark this historic milestone in engineering education and impact.
+        </p>
       </div>
     </div>
   )
