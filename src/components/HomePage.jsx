@@ -41,13 +41,18 @@ const HomePage = () => {
         <div className="slide-caption">
           {slides[currentIndex].caption}
         </div>
+
+        {/* ✅ Only on first slide */}
+        {currentIndex === 0 && (
+          <div className="first-slide-title fade-in-right">
+            <div className="faculty-line">Faculty of Engineering</div>
+            <div className="university-line">University of Peradeniya</div>
+          </div>
+        )}
       </div>
 
       {/* ✅ Description below slideshow */}
       <div className="description-box glass-card">
-        <h2 className="faculty-title">Faculty of Engineering</h2>
-        <h3 className="university-title">University of Peradeniya</h3>
-        <p className="event-date-title">August 26, 2025</p>
         <p className="faculty-description">
           Sri Lanka’s oldest and most prestigious engineering institution — shaping
           generations of innovators, leaders, and visionaries for over 75 years.
