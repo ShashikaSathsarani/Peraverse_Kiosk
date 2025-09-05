@@ -1,11 +1,11 @@
 .home-page {
   background: none;
-  min-height: 100vh;
+  height: 100vh;
   width: 100%;
   display: flex;
-  flex-direction: column; /* stack sections top to bottom */
+  flex-direction: column;
   align-items: center;
-  
+  overflow: hidden;
 }
 
 /* ✅ Fullscreen slideshow */
@@ -58,7 +58,7 @@
   font-size: 2.2rem;
   font-weight: bold;
   line-height: 1.4;
-  padding: 12px 20px;
+  padding: 20px 20px;
   background: rgba(0, 0, 0, 0.6); /* semi-transparent background */
   border-radius: 10px;
   max-width: 400px;
@@ -75,7 +75,7 @@
 .university-line {
   font-size: 1.5rem;
   font-weight: 500;
-  color: #ffffff; /* white */
+  color: #ffffff; 
 }
 
 /* ✅ Fade-in from right */
@@ -86,41 +86,61 @@
 @keyframes slideInRight {
   from {
     opacity: 0;
-    transform: translate(50px, -50%); /* starts shifted right */
+    transform: translate(50px, -50%);
   }
   to {
     opacity: 1;
-    transform: translate(0, -50%); /* final position */
+    transform: translate(0, -50%);
   }
-
 }
 
-/* ✅ Responsiveness: allow scrolling on small screens */
+/* ✅ Full-width, eye-catching description overlay */
+.description-box {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 2rem 3rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.3));
+  color: #fff;
+  text-align: center;
+  backdrop-filter: blur(5px);
+  animation: fadeInUp 1.5s ease forwards;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
+}
+
+.description-box p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
+}
+
+/* Fade-in from bottom animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ✅ Responsiveness */
 @media (max-height: 700px) {
   .slideshow-container {
-    height: auto; /* no forced full screen */
-    min-height: 400px; /* still decent size */
+    height: 100vh;
+    
   }
 }
 
-/* ✅ Transparent card styling */
-.glass-card {
-  margin: 2rem 1rem;
-  padding: 2rem;
-  border-radius: 12px;
-  background: rgba(0,0,0,0.4);
-  backdrop-filter: blur(6px);
-  max-width: 900px;
-  text-align: center;
+@media (max-width: 768px) {
+  .description-box {
+    padding: 1.5rem 1.5rem;
+  }
+
+  .description-box p {
+    font-size: 1rem;
+  }
 }
-
-/* Text styles */
-
-.faculty-description {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: #eee;
-}
-
-
-

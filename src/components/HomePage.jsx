@@ -11,10 +11,10 @@ import Img4 from '../assets/FOEdroneView-scaled.jpg'
 
 const HomePage = () => {
   const slides = [
-    { image: Img1, caption: "Innovation powering the future" },
-    { image: Img2, caption: "Showcasing cutting-edge projects" },
-    { image: Img3, caption: "75 Years of Engineering Excellence" },
-    { image: Img4, caption: "Aerial view of our Faculty campus" }
+    { image: Img1 },
+    { image: Img2 },
+    { image: Img3 },
+    { image: Img4 }
   ]
 
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -42,27 +42,27 @@ const HomePage = () => {
           {slides[currentIndex].caption}
         </div>
 
-        {/* ✅ Only on first slide */}
+        {/* ✅ Only on first slide: right-aligned title */}
         {currentIndex === 0 && (
           <div className="first-slide-title fade-in-right">
             <div className="faculty-line">Faculty of Engineering</div>
             <div className="university-line">University of Peradeniya</div>
           </div>
         )}
-      </div>
 
-      {/* ✅ Description below slideshow */}
-      <div className="description-box glass-card">
-        <p className="faculty-description">
-          Sri Lanka’s oldest and most prestigious engineering institution — shaping
-          generations of innovators, leaders, and visionaries for over 75 years.
-        </p>
-        <p className="faculty-description">
-          The <strong>Faculty of Engineering, University of Peradeniya</strong> proudly presents 
-          <strong> EngEx2025</strong> – The Diamond Jubilee Exhibition. Discover groundbreaking 
-          <strong> research, innovations</strong>, and <strong>future-shaping projects</strong> 
-          as we mark this historic milestone in engineering education and impact.
-        </p>
+        {/* ✅ Full-width description overlay */}
+        <div className="description-box">
+          <p className="faculty-description">
+            Sri Lanka’s oldest and most prestigious engineering institution — shaping
+            generations of innovators, leaders, and visionaries for over 75 years.
+          </p>
+          <p className="faculty-description">
+            The <strong>Faculty of Engineering, University of Peradeniya</strong> proudly presents 
+            <strong> EngEx2025</strong> – The Diamond Jubilee Exhibition. Discover groundbreaking 
+            <strong> research, innovations</strong>, and <strong>future-shaping projects</strong> 
+            as we mark this historic milestone in engineering education and impact.
+          </p>
+        </div>
       </div>
     </div>
   )
