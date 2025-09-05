@@ -90,7 +90,7 @@ const AboutPage = () => {
         <div className="about-header">
           <h1 className="about-title">
             <span className="title-icon">🎓</span>
-            About PeraVerse 2025
+            About EngEx 2025
           </h1>
           <p className="about-subtitle">
             Faculty of Engineering • University of Peradeniya
@@ -108,7 +108,7 @@ const AboutPage = () => {
           <div className="event-overview-content">
             <div className="event-description">
               <p>
-                PeraVerse 2025 is the premier engineering exhibition showcasing innovative 
+                EngEx 2025 is the premier engineering exhibition showcasing innovative 
                 solutions and cutting-edge research from the Faculty of Engineering, 
                 University of Peradeniya. This annual event brings together students, 
                 faculty, industry professionals, and the community to explore the latest 

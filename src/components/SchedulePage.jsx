@@ -117,7 +117,7 @@ const SchedulePage = () => {
             <div className="search-input-wrapper">
               <input
                 type="text"
-                placeholder="Search by title, location, time, or status..."
+                placeholder="Search by title, location..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="search-input"

@@ -49,7 +49,7 @@ const IntroVideo = ({ onVideoClick }) => {
             <p>University of Peradeniya</p>
             <div className="touch-hint">
               <span className="touch-icon">👆</span>
-              <p>Touch anywhere to continue</p>
+              <p>Touch</p>
             </div>
           </div>
         </div>
@@ -70,7 +70,7 @@ const IntroVideo = ({ onVideoClick }) => {
             <div className="video-overlay">
               <div className="touch-hint">
                 <span className="touch-icon">👆</span>
-                <p>Touch anywhere to continue</p>
+                <p>Touch To Continue</p>
               </div>
             </div>
           )}
