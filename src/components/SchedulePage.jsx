@@ -1,35 +1,41 @@
 import { useState, useEffect } from 'react'
+import { getAllEvents, getEventsWithinHour, formatEventForDisplay } from '../eventService'
 import './SchedulePage.css'
 
 const SchedulePage = () => {
   // State management
   const [searchQuery, setSearchQuery] = useState('')
-  const [events, setEvents] = useState([])
+  const [currentEvents, setCurrentEvents] = useState([]) // Events within an hour
+  const [allEvents, setAllEvents] = useState([]) // All events for search
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [searchResults, setSearchResults] = useState(0)
   
-  // Fetch events from API
+  // Fetch events from database
   useEffect(() => {
     const fetchEvents = async () => {
       try {
         setLoading(true)
         setError(null)
         
-        const response = await fetch('http://localhost:5000/events')
+        // Fetch both current events and all events
+        const [currentResult, allResult] = await Promise.all([
+          getEventsWithinHour(),
+          getAllEvents()
+        ])
         
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`)
+        if (currentResult.success && allResult.success) {
+          // Format events for display
+          const formattedCurrentEvents = currentResult.data.map(formatEventForDisplay)
+          const formattedAllEvents = allResult.data.map(formatEventForDisplay)
+          
+          setCurrentEvents(formattedCurrentEvents)
+          setAllEvents(formattedAllEvents)
+        } else {
+          setError(currentResult.error || allResult.error || 'Failed to fetch events')
         }
-        
-        const data = await response.json()
-        
-        // Format events for display
-        const formattedEvents = data.map(formatEventForDisplay)
-        setEvents(formattedEvents)
-        
       } catch (err) {
-        setError(err.message || 'Failed to fetch events')
+        setError('An unexpected error occurred')
         console.error('Error fetching events:', err)
       } finally {
         setLoading(false)
@@ -37,70 +43,24 @@ const SchedulePage = () => {
     }
     
     fetchEvents()
+    
+    // Set up interval to refresh events every minute
+    const interval = setInterval(fetchEvents, 60000) // Refresh every minute
+    
+    return () => clearInterval(interval)
   }, [])
 
-  // Format event data from API response to match component expectations
-  const formatEventForDisplay = (event) => {
-    const now = new Date()
-    const eventDate = new Date(`${event.date}T${event.start_time}`)
-    const eventEndDate = new Date(`${event.date}T${event.end_time}`)
-    
-    // Determine event status
-    let status = 'upcoming'
-    if (now >= eventDate && now <= eventEndDate) {
-      status = 'ongoing'
-    } else if (now > eventEndDate) {
-      status = 'completed'
+  // Enhanced filter function - searches in all events when there's a query
+  const getDisplayEvents = () => {
+    if (!searchQuery.trim()) {
+      // No search query - show only current/upcoming events
+      return currentEvents
     }
     
-    // Format time display
-    const formatTime = (timeString) => {
-      const time = new Date(`2000-01-01T${timeString}`)
-      return time.toLocaleTimeString('en-US', {
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: true
-      })
-    }
-    
-    // Calculate duration
-    const startTime = new Date(`2000-01-01T${event.start_time}`)
-    const endTime = new Date(`2000-01-01T${event.end_time}`)
-    const durationMs = endTime - startTime
-    const durationHours = Math.floor(durationMs / (1000 * 60 * 60))
-    const durationMinutes = Math.floor((durationMs % (1000 * 60 * 60)) / (1000 * 60))
-    
-    let durationText = ''
-    if (durationHours > 0) {
-      durationText += `${durationHours}h `
-    }
-    if (durationMinutes > 0) {
-      durationText += `${durationMinutes}m`
-    }
-    
-    return {
-      id: event.event_id,
-      title: event.event_title,
-      venue: event.department_subzone_name || 'TBA',
-      time: formatTime(event.start_time),
-      duration: durationText || '1h',
-      status: status,
-      type: event.category || 'General',
-      description: event.description || '',
-      date: event.date,
-      start_time: event.start_time,
-      end_time: event.end_time,
-      admin_name: event.admin_name
-    }
-  }
-
-  // Enhanced filter function - searches in multiple fields
-  const filteredEvents = events.filter(event => {
-    if (!searchQuery.trim()) return true
-    
+    // Search query exists - search through all events
     const query = searchQuery.toLowerCase().trim()
     
-    return (
+    return allEvents.filter(event => (
       // Search in title
       event.title.toLowerCase().includes(query) ||
       // Search in venue/location
@@ -112,18 +72,16 @@ const SchedulePage = () => {
       // Search in status
       event.status.toLowerCase().includes(query) ||
       // Search in event type
-      event.type.toLowerCase().includes(query) ||
-      // Search in description
-      event.description.toLowerCase().includes(query) ||
-      // Search in admin name
-      event.admin_name.toLowerCase().includes(query)
-    )
-  })
+      event.type.toLowerCase().includes(query)
+    ))
+  }
 
-  // Update search results count when filtered events change
+  const displayEvents = getDisplayEvents()
+
+  // Update search results count when display events change
   useEffect(() => {
-    setSearchResults(filteredEvents.length)
-  }, [filteredEvents.length])
+    setSearchResults(displayEvents.length)
+  }, [displayEvents.length])
 
   // Function to get status color by status string
   const getStatusColor = (status) => {
@@ -170,14 +128,22 @@ const SchedulePage = () => {
         
         {/* Page Header Section */}
         <div className="schedule-header">
-          <h1 className="schedule-title">Event Schedule</h1>
+          <h1 className="schedule-title">
+            {searchQuery ? 'Event Search Results' : 'Current & Upcoming Events'}
+          </h1>
+          {/* <p className="schedule-subtitle">
+            {searchQuery 
+              ? `Searching all events for "${searchQuery}"`
+              : 'Events happening now or starting within the next hour'
+            }
+          </p> */}
           
           {/* Enhanced Search Input */}
           <div className="search-container">
             <div className="search-input-wrapper">
               <input
                 type="text"
-                placeholder="Search by title, location, admin..."
+                placeholder="Search all events by title, location..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="search-input"
@@ -223,9 +189,9 @@ const SchedulePage = () => {
                 Retry
               </button>
             </div>
-          ) : filteredEvents.length > 0 ? (
-            // Map through filtered events and display each one
-            filteredEvents.map((event, index) => (
+          ) : displayEvents.length > 0 ? (
+            // Map through display events and show each one
+            displayEvents.map((event, index) => (
               <div 
                 key={event.id || index} 
                 className="event-row glass-card slide-in" 
@@ -251,11 +217,6 @@ const SchedulePage = () => {
                     <p className="event-duration">
                       Duration: {highlightSearchTerm(event.duration, searchQuery)}
                     </p>
-                    {event.description && (
-                      <p className="event-description">
-                        {highlightSearchTerm(event.description, searchQuery)}
-                      </p>
-                    )}
                   </div>
                   
                   {/* Event details (location and time) */}
@@ -278,17 +239,20 @@ const SchedulePage = () => {
               </div>
             ))
           ) : (
-            // Show message when no events match the search
+            // Show appropriate message based on search state
             <div className="no-events">
               {searchQuery ? (
                 <div>
                   <p>No events found matching "{searchQuery}"</p>
                   <button onClick={clearSearch} className="clear-search-btn-large">
-                    Show All Events
+                    Show Current Events
                   </button>
                 </div>
               ) : (
-                <p>No events available.</p>
+                <div>
+                  <p>No events are currently happening or starting within the next hour.</p>
+                  <p className="next-events-hint">Use the search bar to find other events!</p>
+                </div>
               )}
             </div>
           )}

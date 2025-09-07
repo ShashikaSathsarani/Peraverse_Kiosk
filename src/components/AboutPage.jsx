@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
-import './AboutPage.css'
+import { useState, useEffect } from "react";
+import "./AboutPage.css";
+import logo from "../assets/engex.png";
 
 const AboutPage = () => {
   const [currentStat, setCurrentStat] = useState(0)
@@ -88,13 +89,20 @@ const AboutPage = () => {
       <div className="about-container">
         {/* Header Section */}
         <div className="about-header">
-          <h1 className="about-title">
-            <span className="title-icon">🎓</span>
-            About EngEx 2025
-          </h1>
-          <p className="about-subtitle">
-            Faculty of Engineering • University of Peradeniya
-          </p>
+          <div className="header-content">
+            <div className="logo-container">
+              <img src={logo} alt="EngEx 2025 Logo" className="header-logo" />
+            </div>
+            <div className="header-text">
+              <h1 className="about-title">
+                <span className="title-icon"></span>
+                About EngEx 2025
+              </h1>
+              <p className="about-subtitle">
+                The Biggest Engineering Exhibition Of The Year
+              </p>
+            </div>
+          </div>
           <div className="header-divider"></div>
         </div>
 
@@ -192,37 +200,7 @@ const AboutPage = () => {
         </div>
 
         {/* University Information */}
-        <div className="glass-card">
-          <div className="university-content">
-            <div className="university-text">
-              <h3>
-                <span>🎓</span>
-                University of Peradeniya
-              </h3>
-              <p>
-                Established in 1942, the University of Peradeniya is one of Sri Lanka's 
-                most prestigious universities. The Faculty of Engineering, founded in 1961, 
-                has been at the forefront of engineering education and research in the region, 
-                producing graduates who have made significant contributions to industry, 
-                academia, and society.
-              </p>
-              <div className="university-stats">
-                <div className="university-stat">
-                  <div className="university-stat-value">83+</div>
-                  <div className="university-stat-label">Years of Excellence</div>
-                </div>
-                <div className="university-stat">
-                  <div className="university-stat-value">64+</div>
-                  <div className="university-stat-label">Years of Engineering</div>
-                </div>
-              </div>
-            </div>
-            <div className="university-logo">
-              <div className="university-logo-icon">🏛️</div>
-              <p className="university-logo-text">University Emblem</p>
-            </div>
-          </div>
-        </div>
+        
       </div>
     </div>
   )

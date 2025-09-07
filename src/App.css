@@ -31,7 +31,7 @@
 }
 
 /* Logo */
-.app-logo {
+/* .app-logo {
   position: fixed;
   top: 1rem;
   right: 1rem;
@@ -48,17 +48,17 @@
   height: 120px;
   object-fit: contain;
   filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
-}
+} */
 
 /* Enhanced Content Wrapper */
 .content-wrapper {
   flex: 1;
   display: flex;
   flex-direction: column;
-  margin-left: 240px;
-  margin-right: 30px;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-left: 220px;
+  margin-right: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   height: calc(100vh - 60px);
 }
 
@@ -74,7 +74,7 @@
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   border-radius: 25px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  /* border: 2px solid rgba(56, 189, 248, 0.5); */
   margin-bottom: 20px;
   box-shadow: 
     inset 0 1px 0 rgba(255, 255, 255, 0.1),
@@ -126,44 +126,16 @@
   }
 }
 
-/* Glass effect utility class */
+/* Glass effect utility class
 .glass-effect {
   background: rgba(255, 255, 255, 0.1);
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 5px solid rgba(5, 127, 250, 0.964);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-}
+} */
 
 /* Enhanced button styles */
-.btn-primary {
-  background: linear-gradient(135deg, #3B82F6, #06B6D4);
-  border: none;
-  color: white;
-  padding: 12px 24px;
-  border-radius: 12px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-}
-
-.btn-primary:hover {
-  background: linear-gradient(135deg, #38BDF8, #06B6D4);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(56, 189, 248, 0.4);
-}
-
-/* Status indicators with Cyan Teal */
-.status-indicator {
-  background: #06B6D4;
-  color: white;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  box-shadow: 0 2px 8px rgba(6, 182, 212, 0.3);
-}
 
 /* Responsive adjustments */
 @media (max-width: 768px) {

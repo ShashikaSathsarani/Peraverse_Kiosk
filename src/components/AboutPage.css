@@ -25,7 +25,7 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  font-size: 3rem;
+  font-size: 5rem;
   font-family: 'Arial', sans-serif;
   font-weight: 700;
   color: white;
@@ -39,9 +39,18 @@
 
 .about-subtitle {
   color: #93c5fd;
-  font-size: 1.25rem;
+  font-size: 2rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
+}
+
+.sidebar-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .header-divider {
@@ -461,4 +470,30 @@
   .dynamic-stats-card {
     padding: 1rem;
   }
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.header-logo {
+  width: 350px;
+  height: 350px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.header-text {
+  flex: 1;
+}
+
+.about-title {
+  margin: 0;
+}
+
+.about-subtitle {
+  margin: 5px 0 0 0;
 }

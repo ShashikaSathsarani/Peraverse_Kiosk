@@ -139,3 +139,43 @@ export function formatEventForDisplay(event) {
     isToday: eventDate.toDateString() === today.toDateString()
   }
 }
+
+// Get events that are ongoing or will start within an hour from current time
+export async function getEventsWithinHour() {
+  try {
+    const now = new Date()
+    const oneHourFromNow = new Date(now.getTime() + (60 * 60 * 1000)) // Add 1 hour
+    
+    // Get today's date in YYYY-MM-DD format
+    const today = now.toISOString().split('T')[0]
+    const tomorrow = new Date(now.getTime() + (24 * 60 * 60 * 1000)).toISOString().split('T')[0]
+    
+    const { data, error } = await supabase
+      .from('events')
+      .select('*')
+      .or(`date.eq.${today},date.eq.${tomorrow}`) // Include today and tomorrow to handle edge cases
+      .order('date', { ascending: true })
+      .order('starttime', { ascending: true })
+    
+    if (error) throw error
+    
+    // Filter events that are ongoing or start within the next hour
+    const filteredEvents = data.filter(event => {
+      const eventStartDateTime = new Date(`${event.date}T${event.starttime}`)
+      const eventEndDateTime = new Date(`${event.date}T${event.endtime}`)
+      
+      // Include if:
+      // 1. Event is currently ongoing (started but not ended)
+      // 2. Event will start within the next hour
+      return (
+        (now >= eventStartDateTime && now < eventEndDateTime) || // Ongoing
+        (eventStartDateTime >= now && eventStartDateTime <= oneHourFromNow) // Starting within hour
+      )
+    })
+    
+    return { success: true, data: filteredEvents }
+  } catch (error) {
+    console.error('Error fetching events within hour:', error)
+    return { success: false, error: error.message }
+  }
+}
