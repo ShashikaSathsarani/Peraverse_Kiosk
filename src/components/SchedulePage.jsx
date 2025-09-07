@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { getAllEvents, formatEventForDisplay } from '../eventService'
 import './SchedulePage.css'
 
 const SchedulePage = () => {
@@ -10,24 +9,27 @@ const SchedulePage = () => {
   const [error, setError] = useState(null)
   const [searchResults, setSearchResults] = useState(0)
   
-  // Fetch events from database
+  // Fetch events from API
   useEffect(() => {
     const fetchEvents = async () => {
       try {
         setLoading(true)
         setError(null)
         
-        const result = await getAllEvents()
+        const response = await fetch('http://localhost:5000/events')
         
-        if (result.success) {
-          // Format events for display
-          const formattedEvents = result.data.map(formatEventForDisplay)
-          setEvents(formattedEvents)
-        } else {
-          setError(result.error || 'Failed to fetch events')
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`)
         }
+        
+        const data = await response.json()
+        
+        // Format events for display
+        const formattedEvents = data.map(formatEventForDisplay)
+        setEvents(formattedEvents)
+        
       } catch (err) {
-        setError('An unexpected error occurred')
+        setError(err.message || 'Failed to fetch events')
         console.error('Error fetching events:', err)
       } finally {
         setLoading(false)
@@ -36,6 +38,61 @@ const SchedulePage = () => {
     
     fetchEvents()
   }, [])
+
+  // Format event data from API response to match component expectations
+  const formatEventForDisplay = (event) => {
+    const now = new Date()
+    const eventDate = new Date(`${event.date}T${event.start_time}`)
+    const eventEndDate = new Date(`${event.date}T${event.end_time}`)
+    
+    // Determine event status
+    let status = 'upcoming'
+    if (now >= eventDate && now <= eventEndDate) {
+      status = 'ongoing'
+    } else if (now > eventEndDate) {
+      status = 'completed'
+    }
+    
+    // Format time display
+    const formatTime = (timeString) => {
+      const time = new Date(`2000-01-01T${timeString}`)
+      return time.toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+      })
+    }
+    
+    // Calculate duration
+    const startTime = new Date(`2000-01-01T${event.start_time}`)
+    const endTime = new Date(`2000-01-01T${event.end_time}`)
+    const durationMs = endTime - startTime
+    const durationHours = Math.floor(durationMs / (1000 * 60 * 60))
+    const durationMinutes = Math.floor((durationMs % (1000 * 60 * 60)) / (1000 * 60))
+    
+    let durationText = ''
+    if (durationHours > 0) {
+      durationText += `${durationHours}h `
+    }
+    if (durationMinutes > 0) {
+      durationText += `${durationMinutes}m`
+    }
+    
+    return {
+      id: event.event_id,
+      title: event.event_title,
+      venue: event.department_subzone_name || 'TBA',
+      time: formatTime(event.start_time),
+      duration: durationText || '1h',
+      status: status,
+      type: event.category || 'General',
+      description: event.description || '',
+      date: event.date,
+      start_time: event.start_time,
+      end_time: event.end_time,
+      admin_name: event.admin_name
+    }
+  }
 
   // Enhanced filter function - searches in multiple fields
   const filteredEvents = events.filter(event => {
@@ -55,7 +112,11 @@ const SchedulePage = () => {
       // Search in status
       event.status.toLowerCase().includes(query) ||
       // Search in event type
-      event.type.toLowerCase().includes(query)
+      event.type.toLowerCase().includes(query) ||
+      // Search in description
+      event.description.toLowerCase().includes(query) ||
+      // Search in admin name
+      event.admin_name.toLowerCase().includes(query)
     )
   })
 
@@ -65,7 +126,6 @@ const SchedulePage = () => {
   }, [filteredEvents.length])
 
   // Function to get status color by status string
-  // Function to get color for different event statuses
   const getStatusColor = (status) => {
     switch(status) {
       case 'ongoing': return "#22c55e"   // Green for ongoing events
@@ -117,7 +177,7 @@ const SchedulePage = () => {
             <div className="search-input-wrapper">
               <input
                 type="text"
-                placeholder="Search by title, location..."
+                placeholder="Search by title, location, admin..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="search-input"
@@ -191,6 +251,11 @@ const SchedulePage = () => {
                     <p className="event-duration">
                       Duration: {highlightSearchTerm(event.duration, searchQuery)}
                     </p>
+                    {event.description && (
+                      <p className="event-description">
+                        {highlightSearchTerm(event.description, searchQuery)}
+                      </p>
+                    )}
                   </div>
                   
                   {/* Event details (location and time) */}

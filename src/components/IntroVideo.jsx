@@ -70,7 +70,7 @@ const IntroVideo = ({ onVideoClick }) => {
             <div className="video-overlay">
               <div className="touch-hint">
                 <span className="touch-icon">👆</span>
-                <p>Touch To Continue</p>
+                <p>Click To Continue</p>
               </div>
             </div>
           )}

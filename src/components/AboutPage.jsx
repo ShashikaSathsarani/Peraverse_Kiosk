@@ -101,7 +101,7 @@ const AboutPage = () => {
         {/* Event Overview - Full Width */}
         <div className="glass-card">
           <h2 className="section-title">
-            <span className="section-icon">🎯</span>
+           
             Event Overview
           </h2>
           

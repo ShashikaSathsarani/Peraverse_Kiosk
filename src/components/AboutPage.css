@@ -55,7 +55,7 @@
 /* Glass Card Base Style */
 .glass-card {
   backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  /* -webkit-backdrop-filter: blur(24px); */
   background: rgba(255, 255, 255, 0.1);
   border-radius: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -208,9 +208,9 @@
 }
 
 .department-card {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  background: rgba(0, 3, 11, 0.1);
+  /* backdrop-filter: blur(24px); */
+  /* -webkit-backdrop-filter: blur(24px); */
   border-radius: 0.75rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 1.5rem;
@@ -218,7 +218,7 @@
 }
 
 .department-card:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(2, 9, 68, 0.867);
   transform: scale(1.05);
 }
 
