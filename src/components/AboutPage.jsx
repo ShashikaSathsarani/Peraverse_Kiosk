@@ -116,16 +116,15 @@ const AboutPage = () => {
           <div className="event-overview-content">
             <div className="event-description">
               <p>
-                EngEx 2025 is the premier engineering exhibition showcasing innovative 
-                solutions and cutting-edge research from the Faculty of Engineering, 
-                University of Peradeniya. This annual event brings together students, 
-                faculty, industry professionals, and the community to explore the latest 
-                developments in engineering and technology.
+                EngEx2025 is a celebration of the legacy, creativity, and innovation of one of Sri Lanka’s premier engineering faculties. 
+                For decades, we have nurtured generations of engineers who drive national growth and contribute to solving global challenges. 
+                This exhibition brings together our past achievements and future aspirations through cutting-edge research, 
+                student projects, and strong industry collaborations.
               </p>
               <p>
-                Our theme this year focuses on "Engineering for a Sustainable Future," 
-                highlighting projects and research that address global challenges in 
-                sustainability, technology, and human welfare.
+                At the heart of this exhibition is our theme: “Engineering for Life”—a belief that engineering is not just about technology, 
+                but about improving lives, shaping communities, and building a sustainable future.
+                Engineering for Life. Engineering for the Future.
               </p>
             </div>
 
