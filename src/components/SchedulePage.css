@@ -303,3 +303,87 @@
   background: rgba(59, 130, 246, 1);
   transform: translateY(-2px);
 }
+
+/* Add these styles to your existing SchedulePage.css file */
+
+/* Tab Navigation */
+.schedule-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0; /* Remove gap between tabs */
+  margin-bottom: 1rem;
+  width: 100%;
+  max-width: 600px; /* Control maximum width */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tab-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center content */
+  gap: 0.5rem;
+  padding: 0.75rem 0; /* Adjust vertical padding */
+  background: rgba(255, 255, 255, 0.1); /* Lighter background */
+  color: #e2e8f0;
+  border: none; /* Remove border */
+  border-radius: 0; /* Remove border radius */
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  flex: 1; /* Make tabs equal width */
+}
+
+/* First tab - left side rounded corners */
+.tab-btn:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+/* Last tab - right side rounded corners */
+.tab-btn:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.tab-btn:hover {
+  background: rgba(59, 130, 246, 0.3);
+  border-color: rgba(59, 130, 246, 0.6);
+  transform: none; /* Remove the transform effect */
+  box-shadow: none; /* Remove box shadow */
+}
+
+.tab-btn.active {
+  background: rgba(59, 130, 246, 0.3);
+  border-color: rgba(59, 130, 246, 0.6); /* Lighter active background */
+  color: white;
+  border: none;
+  box-shadow: none; /* Remove box shadow */
+}
+.tab-icon {
+  font-size: 1.2rem;
+}
+
+.tab-description {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.1rem;
+  margin: 0 0 1.5rem 0;
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .schedule-tabs {
+    flex-direction: row;
+    width: 100%;
+  }
+  
+  .tab-btn {
+    flex: 1;
+    justify-content: center;
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+  }
+}

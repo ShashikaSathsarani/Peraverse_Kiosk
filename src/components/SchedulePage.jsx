@@ -10,6 +10,7 @@ const SchedulePage = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [searchResults, setSearchResults] = useState(0)
+  const [activeTab, setActiveTab] = useState('happening') // New state for active tab
   
   // Fetch events from database
   useEffect(() => {
@@ -41,7 +42,7 @@ const SchedulePage = () => {
         setLoading(false)
       }
     }
-    
+
     fetchEvents()
     
     // Set up interval to refresh events every minute
@@ -52,47 +53,60 @@ const SchedulePage = () => {
 
   // Enhanced filter function - searches in all events when there's a query
   const getDisplayEvents = () => {
-    if (!searchQuery.trim()) {
-      // No search query - show only current/upcoming events
-      return currentEvents
+    if (searchQuery.trim()) {
+      // Search query exists - search through all events
+      const query = searchQuery.toLowerCase().trim()
+      
+      const filteredEvents = allEvents.filter(event => {
+        // Check if query matches status keywords
+        const statusMatch = 
+          (query === 'ongoing' && event.status === 'ongoing') ||
+          (query === 'upcoming' && event.status === 'upcoming') ||
+          (query === 'completed' && event.status === 'completed')
+        
+        // Check if query is in title
+        const titleMatch = event.title.toLowerCase().includes(query)
+        
+        // Check if query is in venue/location
+        const locationMatch = event.venue.toLowerCase().includes(query)
+        
+        // Check if query is in time or duration (secondary matches)
+        const timeMatch = event.time.toLowerCase().includes(query)
+        const durationMatch = event.duration.toLowerCase().includes(query)
+        const typeMatch = event.type && event.type.toLowerCase().includes(query)
+        
+        // Return true if any of the fields match
+        return statusMatch || titleMatch || locationMatch || timeMatch || durationMatch || typeMatch
+      })
+      
+      // Don't set state during render
+      // setSearchResults(filteredEvents.length)
+      return filteredEvents
+    } else {
+      // No search query - show events based on active tab
+      return activeTab === 'happening' ? currentEvents : allEvents
     }
-    
-    // Search query exists - search through all events
-    const query = searchQuery.toLowerCase().trim()
-    
-    return allEvents.filter(event => (
-      // Search in title
-      event.title.toLowerCase().includes(query) ||
-      // Search in venue/location
-      event.venue.toLowerCase().includes(query) ||
-      // Search in time
-      event.time.toLowerCase().includes(query) ||
-      // Search in duration
-      event.duration.toLowerCase().includes(query) ||
-      // Search in status
-      event.status.toLowerCase().includes(query) ||
-      // Search in event type
-      event.type.toLowerCase().includes(query)
-    ))
   }
 
   const displayEvents = getDisplayEvents()
-
-  // Update search results count when display events change
+  
+  // Update search results count after filtering (outside of render function)
   useEffect(() => {
-    setSearchResults(displayEvents.length)
-  }, [displayEvents.length])
+    if (searchQuery.trim()) {
+      setSearchResults(displayEvents.length)
+    }
+  }, [searchQuery, displayEvents.length])
 
-  // Function to get status color by status string
+  // Function to get status color
   const getStatusColor = (status) => {
     switch(status) {
-      case 'ongoing': return "#22c55e"   // Green for ongoing events
-      case 'upcoming': return "#3b82f6"  // Blue for upcoming events
-      case 'completed': return "#6b7280" // Gray for completed events
-      default: return "#6b7280"          // Default gray
+      case 'ongoing': return "#10b981" // Green
+      case 'upcoming': return "#3b82f6" // Blue
+      case 'completed': return "#6b7280" // Gray
+      default: return "#6b7280" // Default Gray
     }
   }
-  
+
   // Function to get status text
   const getStatusText = (status) => {
     switch(status) {
@@ -129,21 +143,40 @@ const SchedulePage = () => {
         {/* Page Header Section */}
         <div className="schedule-header">
           <h1 className="schedule-title">
-            {searchQuery ? 'Event Search Results' : 'Current & Upcoming Events'}
+            {searchQuery ? 'Event Search Results' : 'Events Schedule'}
           </h1>
-          {/* <p className="schedule-subtitle">
-            {searchQuery 
-              ? `Searching all events for "${searchQuery}"`
-              : 'Events happening now or starting within the next hour'
-            }
-          </p> */}
+          
+          {/* Tab Navigation */}
+          <div className="schedule-tabs">
+            <button 
+              className={`tab-btn ${activeTab === 'happening' ? 'active' : ''}`}
+              onClick={() => setActiveTab('happening')}
+            >
+              
+              Events Happening
+            </button>
+            <button 
+              className={`tab-btn ${activeTab === 'all' ? 'active' : ''}`}
+              onClick={() => setActiveTab('all')}
+            >
+              
+              All Events
+            </button>
+          </div>
+          
+          {/* Tab Description */}
+          <p className="tab-description">
+            {activeTab === 'happening' 
+              ? 'Events happening now or starting within the next hour'
+              : 'Complete schedule of all upcoming events'}
+          </p>
           
           {/* Enhanced Search Input */}
           <div className="search-container">
             <div className="search-input-wrapper">
               <input
                 type="text"
-                placeholder="Search all events by title, location..."
+                placeholder="Search by status, title, or location..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="search-input"
@@ -248,10 +281,20 @@ const SchedulePage = () => {
                     Show Current Events
                   </button>
                 </div>
-              ) : (
+              ) : activeTab === 'happening' ? (
                 <div>
                   <p>No events are currently happening or starting within the next hour.</p>
-                  <p className="next-events-hint">Use the search bar to find other events!</p>
+                  <button 
+                    onClick={() => setActiveTab('all')} 
+                    className="clear-search-btn-large"
+                  >
+                    View All Events
+                  </button>
+                </div>
+              ) : (
+                <div>
+                  <p>No events are currently scheduled.</p>
+                  <p className="next-events-hint">Check back later for updates!</p>
                 </div>
               )}
             </div>
