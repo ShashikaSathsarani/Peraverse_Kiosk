@@ -9,7 +9,7 @@ function HeatMapPage() {
       <div className="heatmap-iframe-wrapper">
         {/* Replace the src URL below with the actual heatmap website URL */}
         <iframe
-          src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+          src="https://example.com/heatmap"
           title="Event Heat Map"
           width="100%"
           height="600px"
@@ -22,3 +22,4 @@ function HeatMapPage() {
 }
 
 export default HeatMapPage;
+
