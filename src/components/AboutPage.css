@@ -3,7 +3,7 @@
 .about-page {
   min-height: 100vh;
   padding: 1.5rem;
-  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #1e293b 100%);
+  /* background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #1e293b 100%); */
 }
 
 .about-container {
@@ -96,7 +96,7 @@
 
 .glass-card:hover {
   transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.15);
+  /* background: rgba(255, 255, 255, 0.15); */
 }
 
 /* Section Titles */
