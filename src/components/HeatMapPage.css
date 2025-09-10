@@ -1,24 +1,23 @@
+ h2 {
+   text-align: center;
+   color: #333;
+ }
 .heatmap-container {
-  padding: 2rem;
+  padding: 3rem;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 20px;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.18);
-  max-width: 800px;
-  margin: 2rem auto;
+  max-width: 1600px;
+  margin: rem auto;
 }
 
-.heatmap {
+.heatmap-iframe-wrapper {
   margin-top: 1.5rem;
-  background: rgba(0, 0, 0, 0.05);
-  border-radius: 12px;
-  padding: 1rem;
-  min-height: 300px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.15);
 }
 
-h2 {
-  text-align: center;
-  color: #333;
-}
