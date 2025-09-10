@@ -29,7 +29,7 @@ function App() {
       inactivityTimerRef.current = setTimeout(() => {
         setShowIntroVideo(true)
         setCurrentPage(0) // Reset to home page
-      }, 20000) // 20 seconds
+      }, 60000) // 60 seconds
     }
   }, [showIntroVideo])
 

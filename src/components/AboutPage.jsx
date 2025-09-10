@@ -3,8 +3,6 @@ import { motion } from "framer-motion";
 import "./AboutPage.css";
 import logo from "../assets/engex.png";
 
-
-
 const AboutPage = () => {
   const [currentStat, setCurrentStat] = useState(0);
 
@@ -18,54 +16,14 @@ const AboutPage = () => {
   ];
 
   const departments = [
-    {
-      name: "Computer Engineering",
-      description: "Artificial Intelligence, Software Development, Cybersecurity",
-      projects: 18,
-      color: "#3b82f6"
-    },
-    {
-      name: "Electrical Engineering",
-      description: "Power Systems, Renewable Energy, Smart Grids",
-      projects: 16,
-      color: "#f59e0b"
-    },
-    {
-      name: "Mechanical Engineering",
-      description: "Robotics, Manufacturing, Automotive Technology",
-      projects: 15,
-      color: "#10b981"
-    },
-    {
-      name: "Civil Engineering",
-      description: "Infrastructure, Construction, Environmental Engineering",
-      projects: 14,
-      color: "#8b5cf6"
-    },
-    {
-      name: "Chemical and Process Engineering",
-      description: "Process Engineering, Materials Science, Sustainability",
-      projects: 12,
-      color: "#ef4444"
-    },
-    {
-      name: "Manufacturing and Industrial Engineering",
-      description: "Production Systems, Automation, Quality Control, and Industrial Processes",
-      projects: 11,
-      color: "#06b6d4"
-    },
-    {
-      name: "Engineering Management",
-      description: "Project Leadership, Operations Optimization, Technology Management",
-      projects: 11,
-      color: "#d406a7"
-    },
-    {
-      name: "Engineering Mathematics",
-      description: "Computational Methods, Mathematical Modeling, Data Analysis, and Algorithm Development",
-      projects: 11,
-      color: "#d3d15e"
-    }
+    { name: "Computer Engineering", description: "AI, Software, Cybersecurity", projects: 18, color: "#3b82f6" },
+    { name: "Electrical Engineering", description: "Power Systems, Renewable Energy, Smart Grids", projects: 16, color: "#f59e0b" },
+    { name: "Mechanical Engineering", description: "Robotics, Manufacturing, Automotive Technology", projects: 15, color: "#10b981" },
+    { name: "Civil Engineering", description: "Infrastructure, Construction, Environmental Engineering", projects: 14, color: "#8b5cf6" },
+    { name: "Chemical & Process Engineering", description: "Process Engineering, Materials Science, Sustainability", projects: 12, color: "#ef4444" },
+    { name: "Manufacturing & Industrial Engineering", description: "Production, Automation, Quality Control", projects: 11, color: "#06b6d4" },
+    { name: "Engineering Management", description: "Project Leadership, Operations Optimization, Tech Management", projects: 11, color: "#d406a7" },
+    { name: "Engineering Mathematics", description: "Computational Methods, Modeling, Data Analysis", projects: 11, color: "#d3d15e" }
   ];
 
   const highlights = [
@@ -87,6 +45,7 @@ const AboutPage = () => {
   return (
     <div className="about-page">
       <div className="about-container">
+
         {/* Header */}
         <motion.div 
           className="about-header"
@@ -105,11 +64,10 @@ const AboutPage = () => {
             <div className="header-text">
               <h1 className="about-title">EngEx 2025</h1>
               <p className="about-subtitle">
-                The Biggest Engineering Exhibition Of The Year 
+                The Biggest Engineering Exhibition Of The Year
               </p>
             </div>
           </div>
-          
         </motion.div>
 
         {/* Event Overview */}
@@ -133,12 +91,21 @@ const AboutPage = () => {
               </p>
             </div>
 
-            {/* Highlights */}
-            <div className="highlights-main-grid">
+            {/* Highlights Grid */}
+            <motion.div 
+              className="highlights-main-grid"
+              initial="hidden"
+              whileInView="visible"
+              variants={{
+                hidden: {},
+                visible: { transition: { staggerChildren: 0.15 } }
+              }}
+            >
               {highlights.map((item, i) => (
                 <motion.div 
                   key={i} 
                   className="highlight-item"
+                  variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.3 }}
                 >
@@ -146,7 +113,7 @@ const AboutPage = () => {
                   <span className="highlight-text">{item.text}</span>
                 </motion.div>
               ))}
-            </div>
+            </motion.div>
 
             {/* Dynamic Stats */}
             <div className="stats-display-container">
@@ -212,6 +179,7 @@ const AboutPage = () => {
             </motion.div>
           ))}
         </div>
+
       </div>
     </div>
   );
