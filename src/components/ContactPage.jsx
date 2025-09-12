@@ -238,10 +238,7 @@ const ContactPage = () => {
   return (
     <div className="contact-page">
       <div className="contact-container">
-        <div className="contact-header">
-          <div className="header-icon-container">
-            <span className="header-main-icon">📞</span>
-          </div>
+        <div className="contact-heading">
           <h1>Emergency & Contact Information</h1>
           <p className="header-subtitle">Faculty of Engineering • University of Peradeniya</p>
         </div>

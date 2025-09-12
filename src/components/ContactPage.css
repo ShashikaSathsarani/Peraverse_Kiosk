@@ -18,6 +18,28 @@
 	width: 100%;
 	padding: 2rem 1rem;
 }
+.contact-heading {
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.contact-heading h1 {
+  font-size: 3rem; 
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(to right, #ebecee, #edeef1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.contact-heading .header-subtitle {
+  color: #cbd5e1;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin: 0;
+}
 
 .contact-header {
 	text-align: center;
